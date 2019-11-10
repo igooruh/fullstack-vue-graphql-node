@@ -21,7 +21,12 @@
 								</li>
 							</ul>
 							<br />
-							<input class="form-control" type="text" placeholder="Digite o prefixo " />
+							<div class="input-group">
+								<input class="form-control" type="text" placeholder="Digite o prefixo " />
+								<div class="input-group-append">
+									<button class="btn btn-info"><span class="fa fa-plus"></span></button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -35,7 +40,12 @@
 								</li>
 							</ul>
 							<br />
-							<input class="form-control" type="text" placeholder="Digite o sufixo " />
+							<div class="input-group">
+								<input class="form-control" type="text" placeholder="Digite o sufixo" />
+								<div class="input-group-append">
+									<button class="btn btn-info"><span class="fa fa-plus"></span></button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -50,6 +60,13 @@
 							{{ domain.name }}
 						</li>
 					</ul>
+					<br />
+					<div class="input-group">
+						<input class="form-control" type="text" placeholder="Digite o sufixo" />
+						<div class="input-group-append">
+							<button class="btn btn-info"><span class="fa fa-plus"></span></button>
+						</div>
+					</div>
 				</div>
 			</div>
         </div>
