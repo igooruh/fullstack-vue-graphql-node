@@ -57,16 +57,9 @@
 				<div class="card-body">
 					<ul class="list-group">
 						<li class="list-group-item" v-for="domain in domains" v-bind:key="domain">
-							{{ domain.name }}
+							{{ domain }}
 						</li>
 					</ul>
-					<br />
-					<div class="input-group">
-						<input class="form-control" type="text" placeholder="Digite o sufixo" />
-						<div class="input-group-append">
-							<button class="btn btn-info"><span class="fa fa-plus"></span></button>
-						</div>
-					</div>
 				</div>
 			</div>
         </div>
@@ -86,82 +79,11 @@ export default {
 		return {
 			prefixes: ['Air', 'Jet', 'Flight', 'Emirates', 'Tam'],
 			sufixes: ['Hub', 'Station', 'Mart', 'Fly', 'Airlines'],
-			domains: [
-				{
-					name: 'AirHub'
-				},
-				{
-					name: 'AirStation'
-				},
-				{
-					name: 'AirMart'
-				},
-				{
-					name: 'AirFly'
-				},
-				{
-					name: 'AirAirlines'
-				},
-				{
-					name: 'JetHub'
-				},
-				{
-					name: 'JetStation'
-				},
-				{
-					name: 'JetMart'
-				},
-				{
-					name: 'JetFly'
-				},
-				{
-					name: 'JetAirlines'
-				},
-				{
-					name: 'FlightHub'
-				},
-				{
-					name: 'FlightStation'
-				},
-				{
-					name: 'FlightMart'
-				},
-				{
-					name: 'FlightFly'
-				},
-				{
-					name: 'FlightAirlines'
-				},
-				{
-					name: 'EmiratesHub'
-				},
-				{
-					name: 'EmiratesStation'
-				},
-				{
-					name: 'EmiratesMart'
-				},
-				{
-					name: 'EmiratesFly'
-				},
-				{
-					name: 'EmiratesAirlines'
-				},
-				{
-					name: 'TamHub'
-				},
-				{
-					name: 'TamStation'
-				},
-				{
-					name: 'TamMart'
-				},
-				{
-					name: 'TamFly'
-				},
-				{
-					name: 'TamAirlines'
-				}
+			domains: ['AirHub',	'AirStation', 'AirMart', 'AirFly', 'AirAirlines',
+				'JetHub', 'JetStation', 'JetMart', 'JetFly', 'JetAirlines',
+				'FlightHub', 'FlightStation','FlightMart', 'FlightFly', 'FlightAirlines',
+				'EmiratesHub', 'EmiratesStation', 'EmiratesMart', 'EmiratesFly', 'EmiratesAirlines',
+				'TamHub', 'TamStation',	'TamMart', 'TamFly', 'TamAirlines'
 			],
 		};
 	}
