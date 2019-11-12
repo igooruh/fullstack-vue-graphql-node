@@ -17,14 +17,25 @@
 						<div class="card-body">
 							<ul class="list-group">
 								<li class="list-group-item" v-for="prefix in prefixes" v-bind:key="prefix">
-									{{ prefix }}
+									<div  class="row">
+										<div class="col-md">
+											{{ prefix }}
+										</div>
+										<div class="col-md text-right">
+											<button title="Excluir prefixo" class="btn btn-info" v-on:click="deletePrefix(prefix)">
+												<span class="fa fa-trash"></span>
+											</button>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<br />
 							<div class="input-group">
-								<input class="form-control" type="text" v-model="prefix" placeholder="Digite o prefixo " />
+								<input class="form-control" type="text" v-model="prefix" v-on:keyup.enter="addPrefixes(prefix)" placeholder="Digite o prefixo " />
 								<div class="input-group-append">
-									<button class="btn btn-info" v-on:click="addSufixes(prefix)"><span class="fa fa-plus"></span></button>
+									<button title="Incluir prefixo" class="btn btn-info" v-on:click="addSufixes(prefix)">
+										<span class="fa fa-plus"></span>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -36,14 +47,25 @@
 						<div class="card-body">
 							<ul class="list-group">
 								<li class="list-group-item" v-for="sufix in sufixes" v-bind:key="sufix">
-									{{ sufix }}
+									<div class="row">
+										<div class="col-md">
+											{{ sufix }}
+										</div>
+										<div class="col-md text-right">
+											<button title="Excluir sufixo" class="btn btn-info" v-on:click="deleteSufix(sufix)">
+												<span class="fa fa-trash"></span>
+											</button>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<br />
 							<div class="input-group">
-								<input class="form-control" type="text" v-model="sufix" placeholder="Digite o sufixo" />
+								<input class="form-control" type="text" v-model="sufix" v-on:keyup.enter="addSufixes(sufix)" placeholder="Digite o sufixo" />
 								<div class="input-group-append">
-									<button class="btn btn-info" v-on:click="addSufixes(sufix)"><span class="fa fa-plus"></span></button>
+									<button title="Incluir sufixo" class="btn btn-info" v-on:click="addSufixes(sufix)">
+										<span class="fa fa-plus"></span>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -97,9 +119,19 @@ export default {
 			this.generate();
 		},
 
+		deletePrefix(prefix) {
+			this.prefixes.splice(this.prefixes.indexOf(prefix), 1);
+			this.generate();
+		},
+
 		addSufixes(sufix) {
 			this.sufixes.push(sufix);
 			this.sufix = '';
+			this.generate();
+		},
+
+		deleteSufix(sufix) {
+			this.sufixes.splice(this.sufixes.indexOf(sufix), 1);
 			this.generate();
 		},
 
