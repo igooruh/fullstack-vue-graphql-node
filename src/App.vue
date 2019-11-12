@@ -22,9 +22,9 @@
 							</ul>
 							<br />
 							<div class="input-group">
-								<input class="form-control" type="text" placeholder="Digite o prefixo " />
+								<input class="form-control" type="text" v-model="prefix" placeholder="Digite o prefixo " />
 								<div class="input-group-append">
-									<button class="btn btn-info"><span class="fa fa-plus"></span></button>
+									<button class="btn btn-info" v-on:click="addSufixes(prefix)"><span class="fa fa-plus"></span></button>
 								</div>
 							</div>
 						</div>
@@ -41,9 +41,9 @@
 							</ul>
 							<br />
 							<div class="input-group">
-								<input class="form-control" type="text" placeholder="Digite o sufixo" />
+								<input class="form-control" type="text" v-model="sufix" placeholder="Digite o sufixo" />
 								<div class="input-group-append">
-									<button class="btn btn-info"><span class="fa fa-plus"></span></button>
+									<button class="btn btn-info" v-on:click="addSufixes(sufix)"><span class="fa fa-plus"></span></button>
 								</div>
 							</div>
 						</div>
@@ -77,6 +77,8 @@ export default {
 	name: 'app',
 	data: function() {
 		return {
+			prefix: '',
+			sufix: '',
 			prefixes: ['Air', 'Jet', 'Flight', 'Emirates', 'Tam'],
 			sufixes: ['Hub', 'Station', 'Mart', 'Fly', 'Airlines'],
 			domains: ['AirHub',	'AirStation', 'AirMart', 'AirFly', 'AirAirlines',
@@ -86,6 +88,29 @@ export default {
 				'TamHub', 'TamStation',	'TamMart', 'TamFly', 'TamAirlines'
 			],
 		};
+	},
+
+	methods: {
+		addPrefixes(prefix) {
+			this.prefixes.push(prefix);
+			this.prefix = '';
+			this.generate();
+		},
+
+		addSufixes(sufix) {
+			this.sufixes.push(sufix);
+			this.sufix = '';
+			this.generate();
+		},
+
+		generate() {
+			this.domains = [];
+			for(const prefix of this.prefixes) {
+				for(const sufix of this.sufixes) {
+					this.domains.push(prefix + sufix);
+				}
+			}
+		}
 	}
 };
 </script>
