@@ -33,7 +33,7 @@
 							<div class="input-group">
 								<input class="form-control" type="text" v-model="prefix" v-on:keyup.enter="addPrefixes(prefix)" placeholder="Digite o prefixo " />
 								<div class="input-group-append">
-									<button title="Incluir prefixo" class="btn btn-info" v-on:click="addSufixes(prefix)">
+									<button title="Incluir prefixo" class="btn btn-info" v-on:click="addPrefixes(prefix)">
 										<span class="fa fa-plus"></span>
 									</button>
 								</div>
@@ -78,8 +78,17 @@
 			<div class="card">
 				<div class="card-body">
 					<ul class="list-group">
-						<li class="list-group-item" v-for="domain in domains" v-bind:key="domain">
-							{{ domain }}
+						<li class="list-group-item" v-for="domain in domains" v-bind:key="domain.name">
+							<div class="row">
+								<div class="col-md">
+									{{ domain.name }}
+								</div>
+								<div class="col-md text-right">
+									<a class="btn btn-info" v-bind:href="domain.checkout" target="_blank">
+										<span class="fa fa-shopping-cart"></span>
+									</a>
+								</div>
+							</div>
 						</li>
 					</ul>
 				</div>
@@ -92,6 +101,7 @@
 </template>
 
 <script>
+'use strict';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 
@@ -101,14 +111,8 @@ export default {
 		return {
 			prefix: '',
 			sufix: '',
-			prefixes: ['Air', 'Jet', 'Flight', 'Emirates', 'Tam'],
-			sufixes: ['Hub', 'Station', 'Mart', 'Fly', 'Airlines'],
-			domains: ['AirHub',	'AirStation', 'AirMart', 'AirFly', 'AirAirlines',
-				'JetHub', 'JetStation', 'JetMart', 'JetFly', 'JetAirlines',
-				'FlightHub', 'FlightStation','FlightMart', 'FlightFly', 'FlightAirlines',
-				'EmiratesHub', 'EmiratesStation', 'EmiratesMart', 'EmiratesFly', 'EmiratesAirlines',
-				'TamHub', 'TamStation',	'TamMart', 'TamFly', 'TamAirlines'
-			],
+			prefixes: ['Air', 'Jet', 'Emirates', 'Tam'],
+			sufixes: ['Hub', 'Station', 'Fly', 'Airlines'],
 		};
 	},
 
@@ -116,34 +120,45 @@ export default {
 		addPrefixes(prefix) {
 			this.prefixes.push(prefix);
 			this.prefix = '';
-			this.generate();
 		},
 
 		deletePrefix(prefix) {
 			this.prefixes.splice(this.prefixes.indexOf(prefix), 1);
-			this.generate();
 		},
 
 		addSufixes(sufix) {
 			this.sufixes.push(sufix);
 			this.sufix = '';
-			this.generate();
 		},
 
 		deleteSufix(sufix) {
 			this.sufixes.splice(this.sufixes.indexOf(sufix), 1);
-			this.generate();
 		},
+	},
 
-		generate() {
-			this.domains = [];
+	computed: {
+		domains() {
+			const domains = [];
 			for(const prefix of this.prefixes) {
 				for(const sufix of this.sufixes) {
-					this.domains.push(prefix + sufix);
+					const name = prefix + sufix;
+					const URL = name.toLowerCase();
+					const checkout = `https://checkout.hostgator.com.br/?a=add&sld=${URL}&tld=.com`;
+					domains.push({
+						name,
+						checkout
+					});
 				}
 			}
+			return domains;
 		}
-	}
+	},
+
+	// Lifecycle component
+	// A resolution to list
+	/* created() {
+		this.domains = this.generate();
+	} */
 };
 </script>
 
